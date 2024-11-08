@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laurel YAMA</title>
+    <style>
+        /* Style de la page initiale (effrayante) */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+            font-family: 'Courier New', monospace;
+            color: #ff0000;
+            overflow: hidden;
+            transition: background-color 1s ease, color 1s ease;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #ff0000;
+        }
+        .smiley {
+            font-size: 2.5em;
+            color: #ff0000;
+            animation: flicker 1.5s infinite alternate;
+        }
+        .message {
+            font-size: 1.2em;
+            color: #ff0000;
+            margin-top: 20px;
+            cursor: pointer;
+            animation: pulse 1s infinite;
+        }
+
+        /* Style après le clic (ambiance plus douce) */
+        .softer {
+            background-color: #f0f0f0 !important;
+            color: #333 !important;
+        }
+        .softer h1, .softer .message, .softer footer {
+            display: none;
+        }
+        .softer .reaction {
+            font-size: 2.5em;
+            color: #333;
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        /* Animation */
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Laurel YAMA <span class="smiley">😈</span></h1>
+        <h1>Donc, vous n'avez pas peur de mes liens ?</h1>
+        <div class="message" onclick="handleClick()">Cliquez ici... si vous l'osez !</div>
+        <footer>&copy; Laurel YAMA.2024 Tous droits reservés.</footer>
+    </div>
+    
+    <div class="reaction" id="reaction-message">
+        <!-- Message doux après le clic -->
+    </div>
+    
+    <audio id="scary-sound">
+        <source src="niamatos.mp3" type="audio/mp3">
+    </audio>
+    
+    <script>
+        function playSound() {
+            const audio = document.getElementById('scary-sound');
+            audio.play().catch(err => console.log("Lecture bloquée : ", err));
+        }
+
+        function handleClick() {
+            // Changer l'ambiance (vers plus doux)
+            document.body.classList.add('softer');
+            
+            // Masquer le contenu initial
+            document.querySelector('.container').style.display = 'none';
+            
+            // Afficher le message doux
+            const message = document.getElementById('reaction-message');
+            message.textContent = "Tu es courageux(se) 😁";
+            message.style.display = 'flex';
+
+            // Jouer le son effrayant
+            playSound();
+        }
+    </script>
+</body>
+</html>
